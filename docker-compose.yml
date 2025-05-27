@@ -1,0 +1,14 @@
+services:
+    onlineshop:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        container_name: online-shop
+        ports:
+        - "3001:80"
+        restart: always
+        networks:
+        - onlineshop_network
+networks:
+    onlineshop_network:
+        driver: bridge
