@@ -19,6 +19,7 @@ pipeline {
         }
         stage('run container') {
             steps {
+                sh "docker stop onlineshop; docker rm onlineshop"
                 sh "docker run -d -p 3002:80 shaheen8954/onlineshop"
             }
         }
