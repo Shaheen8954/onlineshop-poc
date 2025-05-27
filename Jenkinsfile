@@ -15,6 +15,8 @@ pipeline {
         stage('build image ') {
             steps {
                 sh "docker build -t shaheen8954/onlineshop ."
+                sh "docker login -u shaheen8954"
+                sh "docker push shaheen8954/onlineshop"
             }
         }
         stage('run container') {
