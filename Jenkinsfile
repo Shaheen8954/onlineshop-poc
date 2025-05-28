@@ -1,20 +1,23 @@
 pipeline {
     agent any
-     environment {
+
+    environment {
         IMAGE_NAME = "shaheen8954/onlineshop"
     }
 
     stages {
-        stage('Clean Workspace ') {
+        stage('Clean Workspace') {
             steps {
                 cleanWs()
             }
         }
-        stage('clone code ') {
+
+        stage('Clone Code') {
             steps {
-                git url: " https://github.com/Shaheen8954/onlineshop-poc.git", branch: "main"
+                git url: 'https://github.com/Shaheen8954/onlineshop-poc.git', branch: 'main'
             }
         }
+
         stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
@@ -24,7 +27,8 @@ pipeline {
                 }
             }
         }
-          stage('Build Docker Image') {
+
+        stage('Build Docker Image') {
             steps {
                 sh 'docker build -t $IMAGE_NAME .'
             }
@@ -36,13 +40,17 @@ pipeline {
             }
         }
 
-        stage('Run container') {
+        stage('Run Container') {
             steps {
-                sh 'docker run -d -p 3002:80 $IMAGE_NAME'
+                // Stop and remove any previous container with same image
+                sh '''
+                    docker rm -f onlineshop-container || true
+                    docker run -d --name onlineshop-container -p 3002:80 $IMAGE_NAME
+                '''
             }
         }
 
-        stage('greeting ') {
+        stage('Greeting') {
             steps {
                 echo 'Application deployed successfully!'
             }
