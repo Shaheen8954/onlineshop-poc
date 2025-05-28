@@ -15,7 +15,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                clone()
+                checkout scm
             }
         }
 
