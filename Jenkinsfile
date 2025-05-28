@@ -37,7 +37,8 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                sh 'docker push $IMAGE_NAME'
+                sh 'docker build -t $IMAGE_NAME onlineshop-poc'
+
             }
         }
 
