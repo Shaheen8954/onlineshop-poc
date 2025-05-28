@@ -31,7 +31,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-               sh 'docker build -t $IMAGE_NAME onlineshop-poc'
+               sh 'docker build -t $IMAGE_NAME .'
+
             }
         }
 
