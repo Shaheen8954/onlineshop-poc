@@ -1,3 +1,4 @@
+@Library('Shared') _
 pipeline {
     agent any
 
@@ -14,7 +15,7 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                git url: 'https://github.com/Shaheen8954/onlineshop-poc.git', branch: 'main'
+                clone()
             }
         }
 
