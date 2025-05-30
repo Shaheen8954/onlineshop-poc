@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: onlinelshop-ingress
+  namespace: onlineshop
+  labels:
+    name: online-shop
+  annotations:
+    nginx.ingress.kubernetse.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec: 
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: onlineshop-svc
+            port:
+              number: 80

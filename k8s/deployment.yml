@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: online-shop
+  namespace: onlineshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: online-shop
+  template:
+    metadata:
+      labels:
+        app: online-shop
+    spec:
+      containers:
+      - name: onlineshop-container
+        image: shaheen8954/onlineshop
+        ports:
+          - containerPort: 80
